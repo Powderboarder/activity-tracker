@@ -134,7 +134,7 @@ class ActivityRestController {
      * @param activityUserId user id value
      * @return
      */
-    @GetMapping("/userActivity/{activityUserId}/{fromDate}/{toDate}")
+    /*@GetMapping("/userActivity/{activityUserId}/{fromDate}/{toDate}")
     CollectionModel<EntityModel<Activity>> getByUserDateRange(@PathVariable Long activityUserId,
             @RequestBody @DateTimeFormat(pattern = "yyyy-MM-dd") Date fromDate,
             @RequestBody @DateTimeFormat(pattern = "yyyy-MM-dd") Date toDate) {
@@ -148,6 +148,6 @@ class ActivityRestController {
         return CollectionModel.of(activityList,
                 linkTo(methodOn(ActivityRestController.class).getByUserDateRange(activityUserId, fromDate, toDate))
                         .withSelfRel());
-    }
+    }*/
 
 }
