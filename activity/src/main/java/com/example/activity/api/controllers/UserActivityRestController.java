@@ -49,19 +49,17 @@ public class UserActivityRestController {
         return activityList;
     }
 
-    @GetMapping("/userActivitySummary/{activityUserId}/{fromDate}/{toDate}")
-    List<UserActivitySummary> getSummaryByUserDateRange(@PathVariable Long activityUserId,
-            @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") Date fromDate,
-            @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") Date toDate) {
+    @GetMapping("/userActivitySummary")
+    List<UserActivitySummary> getSummaryByUserDateRange(@RequestBody UserActivityServiceDTO userActivityServiceDTO) {
         UserActivityService userActivityService = new UserActivityService();
         List<UserActivitySummary> userActivitySummaryList = new ArrayList<UserActivitySummary>();
         List<Activity> activityList = repository
-                .findByActivityUserIdAndActivityDateBetween(activityUserId, fromDate, toDate);
+                .findByActivityUserIdAndActivityDateBetween(userActivityServiceDTO.getActivityUserId(), userActivityServiceDTO.getSummaryStartDate(), userActivityServiceDTO.getSummaryEndDate());
 
-        UserActivityServiceDTO userActivityServiceDTO = new UserActivityServiceDTO();
+        /*UserActivityServiceDTO userActivityServiceDTO = new UserActivityServiceDTO();
         userActivityServiceDTO.setActivityUserId(activityUserId);
         userActivityServiceDTO.setSummaryStartDate(fromDate);
-        userActivityServiceDTO.setSummaryEndDate(toDate);
+        userActivityServiceDTO.setSummaryEndDate(toDate);*/
         userActivityServiceDTO.setActivityList(activityList);
         userActivitySummaryList.addAll(userActivityService.getSummariesFromDateRange(userActivityServiceDTO));
 

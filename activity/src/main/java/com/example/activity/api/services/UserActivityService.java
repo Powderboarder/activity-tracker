@@ -53,7 +53,7 @@ public class UserActivityService {
         userActivitySummary.setSummaryStartDate(userActivityServiceDto.getSummaryStartDate());
         userActivitySummary.setSummaryEndDate(userActivityServiceDto.getSummaryEndDate());
         userActivitySummary.setDurationInMinutes(totalDuration);
-        userActivitySummary.setDistance(activityDistance);
+        userActivitySummary.setDistance(totalDistance);
         userActivitySummary.setDistanceMeasurementType(userActivityServiceDto.getDistanceMeasurementType());
 
         return userActivitySummary;
