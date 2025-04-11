@@ -1,0 +1,11 @@
+services:
+  mysql:
+    container_name: 'activityDB'
+    image: 'mysql:latest'
+    environment:
+      - 'MYSQL_DATABASE=activity'
+      - 'MYSQL_ROOT_PASSWORD=5ptXQ3MAw1t-VAA7gdnB'
+      - 'MYSQL_USER=activity-app'
+      - 'MYSQL_PASSWORD=nv0jq0t8eP!7idX204R3'
+    ports:
+      - '3306:3306'

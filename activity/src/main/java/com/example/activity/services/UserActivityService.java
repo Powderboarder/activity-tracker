@@ -1,4 +1,4 @@
-package com.example.activity.api.services;
+package com.example.activity.services;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -16,13 +16,17 @@ import com.example.activity.utilities.DistanceConversionUtil;
 
 @Service
 public class UserActivityService {
-    public List<UserActivitySummary> getSummariesFromDateRange(final UserActivityServiceDTO userActivityServiceDto) {
+    public List<UserActivitySummary> getSummariesFromDateRange(
+            final UserActivityServiceDTO userActivityServiceDto)
+    {
         final ActivityDateUtil activityDateUtil = new ActivityDateUtil();
         List<UserActivitySummary> userActivitySummaryList = new ArrayList<UserActivitySummary>();
         final SummaryTypeEnum summaryType = activityDateUtil.getSummaryTypeFromDateRange(
-                userActivityServiceDto.getSummaryStartDate(), userActivityServiceDto.getSummaryEndDate());
+                userActivityServiceDto.getSummaryStartDate(),
+                userActivityServiceDto.getSummaryEndDate());
 
-        for (ActivityTypeEnum activityType : ActivityTypeEnum.values()) {
+        for (ActivityTypeEnum activityType : ActivityTypeEnum.values())
+        {
             userActivityServiceDto.setActivityType(activityType);
             userActivitySummaryList.add(getUserActivitySummaryOfType(userActivityServiceDto));
         }
@@ -30,19 +34,26 @@ public class UserActivityService {
         return userActivitySummaryList;
     }
 
-    private UserActivitySummary getUserActivitySummaryOfType(final UserActivityServiceDTO userActivityServiceDto) {
+    private UserActivitySummary getUserActivitySummaryOfType(
+            final UserActivityServiceDTO userActivityServiceDto)
+    {
         UserActivitySummary userActivitySummary = null;
 
         Integer totalDuration = Integer.valueOf(0);
         BigDecimal totalDistance = BigDecimal.ZERO;
         BigDecimal activityDistance = BigDecimal.ZERO;
-        for (Activity activity : userActivityServiceDto.getActivityList()) {
-            if (activity.getActivityType() == userActivityServiceDto.getActivityType()) {
+        for (Activity activity : userActivityServiceDto.getActivityList())
+        {
+            if (activity.getActivityType() == userActivityServiceDto.getActivityType())
+            {
                 totalDuration = totalDuration + activity.getDurationInMinutes();
                 activityDistance = activity.getDistance();
-                if (activity.getDistanceMeasurementType() != userActivityServiceDto.getDistanceMeasurementType()) {
+                if (activity.getDistanceMeasurementType() != userActivityServiceDto
+                        .getDistanceMeasurementType())
+                {
                     activityDistance = DistanceConversionUtil.convertDistance(activityDistance,
-                            activity.getDistanceMeasurementType(), userActivityServiceDto.getDistanceMeasurementType());
+                            activity.getDistanceMeasurementType(),
+                            userActivityServiceDto.getDistanceMeasurementType());
                 }
                 totalDistance = totalDistance.add(activityDistance);
             }
@@ -54,7 +65,8 @@ public class UserActivityService {
         userActivitySummary.setSummaryEndDate(userActivityServiceDto.getSummaryEndDate());
         userActivitySummary.setDurationInMinutes(totalDuration);
         userActivitySummary.setDistance(totalDistance);
-        userActivitySummary.setDistanceMeasurementType(userActivityServiceDto.getDistanceMeasurementType());
+        userActivitySummary
+                .setDistanceMeasurementType(userActivityServiceDto.getDistanceMeasurementType());
 
         return userActivitySummary;
     }

@@ -31,51 +31,63 @@ public class UserActivityServiceDTO {
     @Column(name = "activityList")
     private List<Activity> activityList = null;
 
-    public Long getActivityUserId() {
+    public Long getActivityUserId()
+    {
         return activityUserId;
     }
 
-    public void setActivityUserId(Long activityUserId) {
+    public void setActivityUserId(Long activityUserId)
+    {
         this.activityUserId = activityUserId;
     }
 
-    public Date getSummaryStartDate() {
+    public Date getSummaryStartDate()
+    {
         return summaryStartDate;
     }
 
-    public void setSummaryStartDate(Date summaryStartDate) {
+    public void setSummaryStartDate(Date summaryStartDate)
+    {
         this.summaryStartDate = summaryStartDate;
     }
 
-    public Date getSummaryEndDate() {
+    public Date getSummaryEndDate()
+    {
         return summaryEndDate;
     }
 
-    public void setSummaryEndDate(Date summaryEndDate) {
+    public void setSummaryEndDate(Date summaryEndDate)
+    {
         this.summaryEndDate = summaryEndDate;
     }
 
-    public ActivityTypeEnum getActivityType() {
+    public ActivityTypeEnum getActivityType()
+    {
         return activityType;
     }
 
-    public void setActivityType(ActivityTypeEnum activityType) {
+    public void setActivityType(ActivityTypeEnum activityType)
+    {
         this.activityType = activityType;
     }
 
-    public ActivityDistanceEnum getDistanceMeasurementType() {
+    public ActivityDistanceEnum getDistanceMeasurementType()
+    {
         return distanceMeasurementType;
     }
 
-    public void setDistanceMeasurementType(ActivityDistanceEnum distanceMeasurementType) {
+    public void setDistanceMeasurementType(ActivityDistanceEnum distanceMeasurementType)
+    {
         this.distanceMeasurementType = distanceMeasurementType;
     }
 
-    public List<Activity> getActivityList() {
+    public List<Activity> getActivityList()
+    {
         return activityList;
     }
 
-    public void setActivityList(List<Activity> activityList) {
+    public void setActivityList(List<Activity> activityList)
+    {
         this.activityList = activityList;
     }
 

@@ -2,41 +2,52 @@ package com.example.activity.enums;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public enum ActivityDistanceEnum {
+public enum ActivityDistanceEnum
+{
     @JsonProperty("FEET")
-    FEET {
+    FEET
+    {
         @Override
-        public boolean isImperialMeasurement() {
+        public boolean isImperialMeasurement()
+        {
             return true;
         }
     },
     @JsonProperty("MILES")
-    MILES {
+    MILES
+    {
         @Override
-        public boolean isImperialMeasurement() {
+        public boolean isImperialMeasurement()
+        {
             return true;
         }
     },
     @JsonProperty("METERS")
-    METERS {
+    METERS
+    {
         @Override
-        public boolean isMetricMeasurement() {
+        public boolean isMetricMeasurement()
+        {
             return true;
         }
     },
     @JsonProperty("KILOMETERS")
-    KILOMETERS {
+    KILOMETERS
+    {
         @Override
-        public boolean isMetricMeasurement() {
+        public boolean isMetricMeasurement()
+        {
             return true;
         }
     };
 
-    public boolean isImperialMeasurement() {
+    public boolean isImperialMeasurement()
+    {
         return false;
     }
 
-    public boolean isMetricMeasurement() {
+    public boolean isMetricMeasurement()
+    {
         return false;
     }
 }

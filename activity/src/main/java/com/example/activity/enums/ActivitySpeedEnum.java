@@ -2,25 +2,32 @@ package com.example.activity.enums;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public enum ActivitySpeedEnum {
+public enum ActivitySpeedEnum
+{
     @JsonProperty("FAST")
-    FAST("Intense") {
+    FAST("Intense")
+    {
         @Override
-        public boolean isActivityFast() {
+        public boolean isActivityFast()
+        {
             return true;
         }
     },
     @JsonProperty("MEDIUM")
-    MEDIUM("Moderate") {
+    MEDIUM("Moderate")
+    {
         @Override
-        public boolean isActivityMedium() {
+        public boolean isActivityMedium()
+        {
             return true;
         }
     },
     @JsonProperty("SLOW")
-    SLOW("Easy") {
+    SLOW("Easy")
+    {
         @Override
-        public boolean isActivitySlow() {
+        public boolean isActivitySlow()
+        {
             return true;
         }
     },
@@ -29,19 +36,23 @@ public enum ActivitySpeedEnum {
 
     public String alternativeLabel = null;
 
-    public boolean isActivityFast() {
+    public boolean isActivityFast()
+    {
         return false;
     }
 
-    public boolean isActivityMedium() {
+    public boolean isActivityMedium()
+    {
         return false;
     }
 
-    public boolean isActivitySlow() {
+    public boolean isActivitySlow()
+    {
         return false;
     }
 
-    ActivitySpeedEnum(final String alternativeLabel) {
+    ActivitySpeedEnum(final String alternativeLabel)
+    {
         this.alternativeLabel = alternativeLabel;
     }
 }

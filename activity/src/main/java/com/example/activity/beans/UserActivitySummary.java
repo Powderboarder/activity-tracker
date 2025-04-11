@@ -37,67 +37,83 @@ public class UserActivitySummary {
     @Column(name = "distanceMeasurementType")
     private ActivityDistanceEnum distanceMeasurementType = null;
 
-    public Long getActivityUserId() {
+    public Long getActivityUserId()
+    {
         return activityUserId;
     }
 
-    public void setActivityUserId(Long activityUserId) {
+    public void setActivityUserId(Long activityUserId)
+    {
         this.activityUserId = activityUserId;
     }
 
-    public Date getSummaryStartDate() {
+    public Date getSummaryStartDate()
+    {
         return summaryStartDate;
     }
 
-    public void setSummaryStartDate(Date summaryStartDate) {
+    public void setSummaryStartDate(Date summaryStartDate)
+    {
         this.summaryStartDate = summaryStartDate;
     }
 
-    public Date getSummaryEndDate() {
+    public Date getSummaryEndDate()
+    {
         return summaryEndDate;
     }
 
-    public void setSummaryEndDate(Date summaryEndDate) {
+    public void setSummaryEndDate(Date summaryEndDate)
+    {
         this.summaryEndDate = summaryEndDate;
     }
 
-    public SummaryTypeEnum getSummaryType() {
+    public SummaryTypeEnum getSummaryType()
+    {
         return summaryType;
     }
 
-    public void setSummaryType(SummaryTypeEnum summaryType) {
+    public void setSummaryType(SummaryTypeEnum summaryType)
+    {
         this.summaryType = summaryType;
     }
 
-    public ActivityTypeEnum getActivityType() {
+    public ActivityTypeEnum getActivityType()
+    {
         return activityType;
     }
 
-    public void setActivityType(ActivityTypeEnum activityType) {
+    public void setActivityType(ActivityTypeEnum activityType)
+    {
         this.activityType = activityType;
     }
 
-    public Integer getDurationInMinutes() {
+    public Integer getDurationInMinutes()
+    {
         return durationInMinutes;
     }
 
-    public void setDurationInMinutes(Integer durationInMinutes) {
+    public void setDurationInMinutes(Integer durationInMinutes)
+    {
         this.durationInMinutes = durationInMinutes;
     }
 
-    public BigDecimal getDistance() {
+    public BigDecimal getDistance()
+    {
         return distance;
     }
 
-    public void setDistance(BigDecimal distance) {
+    public void setDistance(BigDecimal distance)
+    {
         this.distance = distance;
     }
 
-    public ActivityDistanceEnum getDistanceMeasurementType() {
+    public ActivityDistanceEnum getDistanceMeasurementType()
+    {
         return distanceMeasurementType;
     }
 
-    public void setDistanceMeasurementType(ActivityDistanceEnum distanceMeasurementType) {
+    public void setDistanceMeasurementType(ActivityDistanceEnum distanceMeasurementType)
+    {
         this.distanceMeasurementType = distanceMeasurementType;
     }
 

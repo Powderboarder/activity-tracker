@@ -23,7 +23,7 @@ public class Activity {
     private Long activityUserId = null;
 
     @Column(name = "activityDate")
-    @JsonFormat(pattern="yyyy-MM-dd", timezone="America/Detroit")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "America/Detroit")
     private Date activityDate = null;
 
     @Column(name = "activityType")
@@ -38,11 +38,13 @@ public class Activity {
     @Column(name = "distanceMeasurementType")
     private ActivityDistanceEnum distanceMeasurementType = null;
 
-    public Activity() {
-    }
+    public Activity()
+    {}
 
-    public Activity(final Long activityUserId, final Date activityDate, final ActivityTypeEnum activityTypeEnum, final Integer durationInMinutes,
-            final BigDecimal distance, final ActivityDistanceEnum activityDistanceEnum) {
+    public Activity(final Long activityUserId, final Date activityDate,
+            final ActivityTypeEnum activityTypeEnum, final Integer durationInMinutes,
+            final BigDecimal distance, final ActivityDistanceEnum activityDistanceEnum)
+    {
         this.activityUserId = activityUserId;
         this.activityDate = activityDate;
         this.activityType = activityTypeEnum;
@@ -51,8 +53,10 @@ public class Activity {
         this.distanceMeasurementType = activityDistanceEnum;
     }
 
-    public Activity(final Long activityUserId, final Date activityDate, final String activityTypeValue, final Integer durationInMinutes,
-            final BigDecimal distance, final String activityDistanceValue) {
+    public Activity(final Long activityUserId, final Date activityDate,
+            final String activityTypeValue, final Integer durationInMinutes,
+            final BigDecimal distance, final String activityDistanceValue)
+    {
         this.activityUserId = activityUserId;
         this.activityDate = activityDate;
         this.activityType = ActivityTypeEnum.valueOf(activityTypeValue);
@@ -61,69 +65,86 @@ public class Activity {
         this.distanceMeasurementType = ActivityDistanceEnum.valueOf(activityDistanceValue);
     }
 
-    public Long getActivityId() {
+    public Long getActivityId()
+    {
         return activityId;
     }
 
-    public void setActivityId(final Long activityId) {
+    public void setActivityId(final Long activityId)
+    {
         this.activityId = activityId;
     }
 
-    public Long getActivityUserId() {
+    public Long getActivityUserId()
+    {
         return activityUserId;
     }
 
-    public void setActivityUserId(final Long activityUserId) {
+    public void setActivityUserId(final Long activityUserId)
+    {
         this.activityUserId = activityUserId;
     }
 
-    public Date getActivityDate() {
+    public Date getActivityDate()
+    {
         return activityDate;
     }
 
-    public void setActivityDate(final Date activityDate) {
+    public void setActivityDate(final Date activityDate)
+    {
         this.activityDate = activityDate;
     }
 
-    public ActivityTypeEnum getActivityType() {
+    public ActivityTypeEnum getActivityType()
+    {
         return activityType;
     }
 
-    public void setActivityType(final ActivityTypeEnum activityType) {
+    public void setActivityType(final ActivityTypeEnum activityType)
+    {
         this.activityType = activityType;
     }
 
-    public Integer getDurationInMinutes() {
+    public Integer getDurationInMinutes()
+    {
         return durationInMinutes;
     }
 
-    public void setDurationInMinutes(final Integer durationInMinutes) {
+    public void setDurationInMinutes(final Integer durationInMinutes)
+    {
         this.durationInMinutes = durationInMinutes;
     }
 
-    public BigDecimal getDistance() {
+    public BigDecimal getDistance()
+    {
         return distance;
     }
 
-    public void setDistance(final BigDecimal distance) {
+    public void setDistance(final BigDecimal distance)
+    {
         this.distance = distance;
     }
 
-    public ActivityDistanceEnum getDistanceMeasurementType() {
+    public ActivityDistanceEnum getDistanceMeasurementType()
+    {
         return distanceMeasurementType;
     }
 
-    public void setDistanceMeasurementType(final ActivityDistanceEnum distanceMeasurementType) {
+    public void setDistanceMeasurementType(final ActivityDistanceEnum distanceMeasurementType)
+    {
         this.distanceMeasurementType = distanceMeasurementType;
     }
 
     @Override
-    public boolean equals(final Object o) {
+    public boolean equals(final Object o)
+    {
 
-        if (this == o) {
+        if (this == o)
+        {
             return true;
         }
-        if (!(o instanceof Activity)) {
+        if (!(o instanceof Activity))
+        {
             return false;
         }
 

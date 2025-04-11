@@ -1,12 +1,10 @@
-package com.example.activity.api.controllers;
+package com.example.activity.controllers;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -109,45 +107,4 @@ class ActivityRestController {
     void deleteActivity(@PathVariable Long id) {
         repository.deleteById(id);
     }
-
-    /**
-     * Pulls all activities for a specified user.
-     * 
-     * @param activityUserId user id value
-     * @return
-     */
-    @GetMapping("/userActivity/{activityUserId}")
-    CollectionModel<EntityModel<Activity>> getByUser(@PathVariable Long activityUserId) {
-        List<EntityModel<Activity>> activityList = repository.findByActivityUserId(activityUserId).stream()
-                .map(activity -> EntityModel.of(activity,
-                        linkTo(methodOn(ActivityRestController.class).one(activity.getActivityId())).withSelfRel(),
-                        linkTo(methodOn(ActivityRestController.class).all()).withRel("userActivity")))
-                .collect(Collectors.toList());
-
-        return CollectionModel.of(activityList,
-                linkTo(methodOn(ActivityRestController.class).getByUser(activityUserId)).withSelfRel());
-    }
-
-    /**
-     * Pulls all activities for a specified user.
-     * 
-     * @param activityUserId user id value
-     * @return
-     */
-    /*@GetMapping("/userActivity/{activityUserId}/{fromDate}/{toDate}")
-    CollectionModel<EntityModel<Activity>> getByUserDateRange(@PathVariable Long activityUserId,
-            @RequestBody @DateTimeFormat(pattern = "yyyy-MM-dd") Date fromDate,
-            @RequestBody @DateTimeFormat(pattern = "yyyy-MM-dd") Date toDate) {
-        List<EntityModel<Activity>> activityList = repository
-                .findByActivityUserIdAndActivityDateBetween(activityUserId, fromDate, toDate).stream()
-                .map(activity -> EntityModel.of(activity,
-                        linkTo(methodOn(ActivityRestController.class).one(activity.getActivityId())).withSelfRel(),
-                        linkTo(methodOn(ActivityRestController.class).all()).withRel("userActivity")))
-                .collect(Collectors.toList());
-
-        return CollectionModel.of(activityList,
-                linkTo(methodOn(ActivityRestController.class).getByUserDateRange(activityUserId, fromDate, toDate))
-                        .withSelfRel());
-    }*/
-
 }

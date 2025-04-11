@@ -1,4 +1,4 @@
-package com.example.activity.api.controllers;
+package com.example.activity.controllers;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.activity.Exceptions.ActivityNotFoundException;
-import com.example.activity.api.services.UserActivityService;
+import com.example.activity.services.UserActivityService;
 import com.example.activity.beans.Activity;
 import com.example.activity.beans.UserActivitySummary;
 import com.example.activity.dto.UserActivityServiceDTO;
@@ -29,8 +29,27 @@ import com.example.activity.testRepository.ActivityRepository;
 public class UserActivityRestController {
     private final ActivityRepository repository;
 
-    UserActivityRestController(ActivityRepository repository) {
+    UserActivityRestController(ActivityRepository repository)
+    {
         this.repository = repository;
+    }
+
+    /**
+     * Pulls all activities for a specified user.
+     * 
+     * @param activityUserId user id value
+     * @return
+     */
+    @GetMapping("/userActivity/{activityUserId}")
+    CollectionModel<EntityModel<Activity>> getByUser(@PathVariable Long activityUserId) {
+        List<EntityModel<Activity>> activityList = repository.findByActivityUserId(activityUserId).stream()
+                .map(activity -> EntityModel.of(activity,
+                        linkTo(methodOn(ActivityRestController.class).one(activity.getActivityId())).withSelfRel(),
+                        linkTo(methodOn(ActivityRestController.class).all()).withRel("userActivity")))
+                .collect(Collectors.toList());
+
+        return CollectionModel.of(activityList,
+                linkTo(methodOn(UserActivityRestController.class).getByUser(activityUserId)).withSelfRel());
     }
 
     /**
@@ -42,7 +61,8 @@ public class UserActivityRestController {
     @GetMapping("/userActivity/{activityUserId}/{fromDate}/{toDate}")
     List<Activity> getByUserDateRange(@PathVariable Long activityUserId,
             @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") Date fromDate,
-            @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") Date toDate) {
+            @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") Date toDate)
+    {
         List<Activity> activityList = repository
                 .findByActivityUserIdAndActivityDateBetween(activityUserId, fromDate, toDate);
 
@@ -50,18 +70,25 @@ public class UserActivityRestController {
     }
 
     @GetMapping("/userActivitySummary")
-    List<UserActivitySummary> getSummaryByUserDateRange(@RequestBody UserActivityServiceDTO userActivityServiceDTO) {
+    List<UserActivitySummary> getSummaryByUserDateRange(
+            @RequestBody UserActivityServiceDTO userActivityServiceDTO)
+    {
         UserActivityService userActivityService = new UserActivityService();
         List<UserActivitySummary> userActivitySummaryList = new ArrayList<UserActivitySummary>();
-        List<Activity> activityList = repository
-                .findByActivityUserIdAndActivityDateBetween(userActivityServiceDTO.getActivityUserId(), userActivityServiceDTO.getSummaryStartDate(), userActivityServiceDTO.getSummaryEndDate());
+        List<Activity> activityList = repository.findByActivityUserIdAndActivityDateBetween(
+                userActivityServiceDTO.getActivityUserId(),
+                userActivityServiceDTO.getSummaryStartDate(),
+                userActivityServiceDTO.getSummaryEndDate());
 
-        /*UserActivityServiceDTO userActivityServiceDTO = new UserActivityServiceDTO();
-        userActivityServiceDTO.setActivityUserId(activityUserId);
-        userActivityServiceDTO.setSummaryStartDate(fromDate);
-        userActivityServiceDTO.setSummaryEndDate(toDate);*/
+        /*
+         * UserActivityServiceDTO userActivityServiceDTO = new UserActivityServiceDTO();
+         * userActivityServiceDTO.setActivityUserId(activityUserId);
+         * userActivityServiceDTO.setSummaryStartDate(fromDate);
+         * userActivityServiceDTO.setSummaryEndDate(toDate);
+         */
         userActivityServiceDTO.setActivityList(activityList);
-        userActivitySummaryList.addAll(userActivityService.getSummariesFromDateRange(userActivityServiceDTO));
+        userActivitySummaryList
+                .addAll(userActivityService.getSummariesFromDateRange(userActivityServiceDTO));
 
         return userActivitySummaryList;
     }
