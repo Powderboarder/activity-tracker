@@ -1,4 +1,4 @@
-package com.example.activity.enums;
+package com.example.activity.usersummary;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

@@ -2,12 +2,12 @@ package com.example.activity.dto;
 
 import java.util.Date;
 import java.util.List;
-
+import com.example.activity.achievements.Achievement;
 import com.example.activity.beans.Activity;
 import com.example.activity.enums.ActivityDistanceEnum;
 import com.example.activity.enums.ActivityTypeEnum;
+import com.example.activity.usersummary.UserActivitySummary;
 import com.fasterxml.jackson.annotation.JsonFormat;
-
 import jakarta.persistence.Column;
 
 public class UserActivityServiceDTO {
@@ -31,12 +31,18 @@ public class UserActivityServiceDTO {
     @Column(name = "activityList")
     private List<Activity> activityList = null;
 
+    @Column(name = "activitySummaryList")
+    private List<UserActivitySummary> activitySummaryList = null;
+
+    @Column(name = "achievementList")
+    private List<Achievement> achievementList = null;
+
     public Long getActivityUserId()
     {
         return activityUserId;
     }
 
-    public void setActivityUserId(Long activityUserId)
+    public void setActivityUserId(final Long activityUserId)
     {
         this.activityUserId = activityUserId;
     }
@@ -46,7 +52,7 @@ public class UserActivityServiceDTO {
         return summaryStartDate;
     }
 
-    public void setSummaryStartDate(Date summaryStartDate)
+    public void setSummaryStartDate(final Date summaryStartDate)
     {
         this.summaryStartDate = summaryStartDate;
     }
@@ -56,7 +62,7 @@ public class UserActivityServiceDTO {
         return summaryEndDate;
     }
 
-    public void setSummaryEndDate(Date summaryEndDate)
+    public void setSummaryEndDate(final Date summaryEndDate)
     {
         this.summaryEndDate = summaryEndDate;
     }
@@ -66,7 +72,7 @@ public class UserActivityServiceDTO {
         return activityType;
     }
 
-    public void setActivityType(ActivityTypeEnum activityType)
+    public void setActivityType(final ActivityTypeEnum activityType)
     {
         this.activityType = activityType;
     }
@@ -76,7 +82,7 @@ public class UserActivityServiceDTO {
         return distanceMeasurementType;
     }
 
-    public void setDistanceMeasurementType(ActivityDistanceEnum distanceMeasurementType)
+    public void setDistanceMeasurementType(final ActivityDistanceEnum distanceMeasurementType)
     {
         this.distanceMeasurementType = distanceMeasurementType;
     }
@@ -86,9 +92,29 @@ public class UserActivityServiceDTO {
         return activityList;
     }
 
-    public void setActivityList(List<Activity> activityList)
+    public void setActivityList(final List<Activity> activityList)
     {
         this.activityList = activityList;
+    }
+
+    public List<UserActivitySummary> getActivitySummaryList()
+    {
+        return activitySummaryList;
+    }
+
+    public void setActivitySummaryList(final List<UserActivitySummary> activitySummaryList)
+    {
+        this.activitySummaryList = activitySummaryList;
+    }
+
+    public List<Achievement> getAchievementList()
+    {
+        return achievementList;
+    }
+
+    public void setAchievementList(final List<Achievement> achievementList)
+    {
+        this.achievementList = achievementList;
     }
 
 }

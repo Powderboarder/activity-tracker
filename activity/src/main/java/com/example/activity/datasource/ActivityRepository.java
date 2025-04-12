@@ -1,4 +1,4 @@
-package com.example.activity.testRepository;
+package com.example.activity.datasource;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

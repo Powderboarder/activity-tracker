@@ -2,9 +2,7 @@ package com.example.activity.utilities;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
-
-import com.example.activity.enums.SummaryTypeEnum;
-
+import com.example.activity.usersummary.SummaryTypeEnum;
 import io.micrometer.common.util.StringUtils;
 
 public class ActivityDateUtil {

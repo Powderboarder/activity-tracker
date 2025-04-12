@@ -7,8 +7,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.example.activity.enums.SummaryTypeEnum;
+import com.example.activity.usersummary.SummaryTypeEnum;
 
 public class ActivityDateUtilTests {
     private static final Logger LOGGER = LoggerFactory.getLogger(ActivityDateUtilTests.class);

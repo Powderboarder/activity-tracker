@@ -3,14 +3,13 @@ package com.example.activity.services;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.stereotype.Service;
-
+import com.example.activity.achievements.AchievementBO;
 import com.example.activity.beans.Activity;
-import com.example.activity.beans.UserActivitySummary;
 import com.example.activity.dto.UserActivityServiceDTO;
 import com.example.activity.enums.ActivityTypeEnum;
-import com.example.activity.enums.SummaryTypeEnum;
+import com.example.activity.usersummary.SummaryTypeEnum;
+import com.example.activity.usersummary.UserActivitySummary;
 import com.example.activity.utilities.ActivityDateUtil;
 import com.example.activity.utilities.DistanceConversionUtil;
 
@@ -19,11 +18,11 @@ public class UserActivityService {
     public List<UserActivitySummary> getSummariesFromDateRange(
             final UserActivityServiceDTO userActivityServiceDto)
     {
-        final ActivityDateUtil activityDateUtil = new ActivityDateUtil();
+        //final ActivityDateUtil activityDateUtil = new ActivityDateUtil();
         List<UserActivitySummary> userActivitySummaryList = new ArrayList<UserActivitySummary>();
-        final SummaryTypeEnum summaryType = activityDateUtil.getSummaryTypeFromDateRange(
-                userActivityServiceDto.getSummaryStartDate(),
-                userActivityServiceDto.getSummaryEndDate());
+        //final SummaryTypeEnum summaryType = activityDateUtil.getSummaryTypeFromDateRange(
+        //        userActivityServiceDto.getSummaryStartDate(),
+        //        userActivityServiceDto.getSummaryEndDate());
 
         for (ActivityTypeEnum activityType : ActivityTypeEnum.values())
         {
@@ -37,6 +36,9 @@ public class UserActivityService {
     private UserActivitySummary getUserActivitySummaryOfType(
             final UserActivityServiceDTO userActivityServiceDto)
     {
+        final AchievementBO achievementBO = new AchievementBO();
+        final ActivityDateUtil activityDateUtil = new ActivityDateUtil();
+
         UserActivitySummary userActivitySummary = null;
 
         Integer totalDuration = Integer.valueOf(0);
@@ -67,6 +69,12 @@ public class UserActivityService {
         userActivitySummary.setDistance(totalDistance);
         userActivitySummary
                 .setDistanceMeasurementType(userActivityServiceDto.getDistanceMeasurementType());
+        userActivitySummary.setAchievementList(achievementBO.getAchievements(userActivitySummary));
+
+        final SummaryTypeEnum summaryType = activityDateUtil.getSummaryTypeFromDateRange(
+                userActivityServiceDto.getSummaryStartDate(),
+                userActivityServiceDto.getSummaryEndDate());
+        userActivitySummary.setSummaryType(summaryType);
 
         return userActivitySummary;
     }
